@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+       
+    <section>
+        <div class="container">
+            <div id="display"></div>
+            <div class="buttons">
+                <div class="button span-2 orange">C</div>
+                <div class="button orange">/</div>
+                <div class="button orange">*</div>
+                <div class="button">7</div>
+                <div class="button">8</div>
+                <div class="button">9</div>
+                <div class="button orange">-</div>
+                <div class="button">4</div>
+                <div class="button">5</div>
+                <div class="button">6</div>
+                <div class="button orange">+</div>
+                <div class="button">1</div>
+                <div class="button">2</div>
+                <div class="button">3</div>
+                <div class="button">.</div>
+                <div class="button span-3">0</div>
+                <div id="equal" class="button orange">=</div>
+             </div>
+        
+        </div>
+    </section>
+
+</body>
+
+<script>
+    
+    var display = document.getElementById('display');
+    //gets each individual button with class name button
+    var buttons = Array.from(document.getElementsByClassName('button'));
+    //maps each button in array to have the following onclick event
+    buttons.map(button => {
+        button.addEventListener('click', (e) => {
+            //modifys and does the math, target relates to the index in array of button that was pressed, similar to this keyword
+            switch (e.target.innerText) {
+                case 'C':
+                    display.innerText = '';
+                    break;
+                case '=':
+                    display.innerText = eval(display.innerText);
+                    break;
+                default:
+                    display.innerText += e.target.innerText;
+            }
+        })
+    });
+    document.addEventListener('keydown', function(e) {
+        //if the keycode entered is numerical, enter, + - * / backspace then use the switch statment to insert the value into display
+        if(e.keyCode >= 48 && e.keyCode <=57 || e.keyCode == 13 || e.keyCode == 187 || e.keyCode == 189 || e.keyCode == 106 || e.keyCode == 191 || e.keyCode == 8){
+            switch (e.keyCode) {
+            case 8:
+                //remove the last string char from the display
+                display.innerText = display.innerText.slice(0, -1);
+                break;
+            case 49:
+                display.innerText += '1';
+                break;
+            case 50:
+                display.innerText += '2';
+                break;
+            case 51:
+                display.innerText += '3';
+                break;
+            case 52:
+                display.innerText += '4';
+                break;
+            case 53:
+                display.innerText += '5';
+                break;
+            case 54:
+                display.innerText += '6';
+                break;
+            case 55:
+                display.innerText += '7';
+                break;
+            case 56:
+                display.innerText += '8';
+                break;
+            case 57:
+                display.innerText += '9';
+                break;
+            case 48:
+                display.innerText += '0';
+                break;
+            case 189:
+                display.innerText += '-';
+                break;
+            case 191:
+                display.innerText += '/';
+                break;
+            case 106:
+                display.innerText += '*';
+                break;
+            case 187:
+                display.innerText += '+';
+                break;
+            case 13:
+                display.innerText = eval(display.innerText);
+                break;
+            default:
+                break;
+            }
+        }
+      
+       
+    });
+ 
+ </script>
+</html>
